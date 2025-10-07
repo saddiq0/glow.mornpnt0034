@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy Clearance Portal</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        :root {
+            --nigerian-green: #474747;
+            --nigerian-white: #a09f7f;
+            --light-green: #96a7ac;
+            --dark-green: #000000;
+            --accent-gold: #fdfdfd;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #707070 0%, #707172 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 0.8rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgb(114, 114, 114);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .logo-circle i {
+            color: var(--nigerian-green);
+            font-size: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(26, 41, 35, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(21, 34, 29, 0.4);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            background: rgb(121, 121, 121);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            color: var(--nigerian-white);
+            padding: 1.5rem;
+            border-bottom: none;
+            position: relative;
+        }
+        
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gold);
+        }
+        
+        .card-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 12px;
+            background: rgba(255, 255, 255, 0.15);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-left: 20px;
+            margin: 30px 0 20px;
+            color: var(--nigerian-green);
+            font-weight: 600;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 30px;
+            background: var(--nigerian-green);
+            border-radius: 4px;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--nigerian-green) 0%, var(--accent-gold) 100%);
+        }
+        
+        .step-indicator {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            color: rgb(133, 133, 133);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-right: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .active-step .step-indicator {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--nigerian-green) 100%);
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--nigerian-green) 100%);
+            color: var(--nigerian-white);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f8f9fa' fill-opacity='1' d='M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .document-box {
+            border: 2px dashed rgba(31, 58, 47, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            background: rgba(230, 244, 234, 0.3);
+            margin-bottom: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .document-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--nigerian-green);
+            background: rgba(0, 135, 81, 0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .document-box i {
+            font-size: 2.8rem;
+            color: var(--nigerian-green);
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .document-box:hover i {
+            transform: scale(1.1);
+        }
+        
+        .position-card {
+            transition: all 0.3s ease;
+            border: 1px solid #858688;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .position-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--nigerian-green), var(--dark-green));
+            transition: all 0.4s ease;
+        }
+        
+        .position-card:hover::before {
+            height: 100%;
+        }
+        
+        .position-card.selected {
+            border-color: var(--nigerian-green);
+            background: rgba(230, 244, 234, 0.3);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .position-card.selected::before {
+            height: 100%;
+        }
+        
+        .flag-stripe {
+            height: 6px;
+            background: var(--nigerian-white);
+            position: relative;
+        }
+        
+        .flag-stripe::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url(/hero.jpg) center/cover no-repeat;
+            padding: 5rem 0;
+            color: rgb(116, 116, 116);
+            text-align: center;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(17, 34, 27, 0.7) 0%, rgba(17, 27, 23, 0.8) 100%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .agency-badge {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: rgb(163, 163, 163);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .agency-badge:hover {
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+        
+        .agency-badge i {
+            font-size: 2.5rem;
+            color: var(--nigerian-green);
+        }
+
+		.agency-logo-wrapper {
+            width: 100px;
+            height: 100px;
+            background: #929292;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+        .agency-logo-wrapper:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .agency-logo {
+          max-width: 70%;
+          max-height: 70%;
+          object-fit: contain;
+          transition: transform 0.3s ease;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: rgb(116, 116, 116);
+            font-size: 1.8rem;
+            box-shadow: 0 6px 15px rgba(25, 39, 33, 0.4);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(9, 14, 12, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 135, 81, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 135, 81, 0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .btn-outline-light {
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            background: rgb(163, 163, 163);
+            color: var(--nigerian-green);
+            transform: translateY(-2px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--nigerian-green);
+            line-height: 1;
+        }
+        
+       
+    </style>
+</head>
+<body>
+    
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/" aria-label="CDCFIB Portal Home">
+                <div class="logo-circle me-3">
+                    <!-- Replace 'logo.png' with your actual logo path -->
+                    <img src="logo.png" alt="CDCFIB Logo" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+                </div>
+                <div>
+                    <span>CDCFIB</span><br>
+                    <small class="d-block text-white text-bold fw-light">Consultancy Clearance Portal</small>
+                </div>
+            </a>
+            <div class="ms-auto d-flex gap-2">
+                <a href="/" class="btn btn-outline-light">
+                    <i class="fas fa-home me-1"></i> Start
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    
+    <div class="flag-stripe"></div>
+    
+    <!-- Hero Section -->
+    <div class="hero-section mb-0">
+        <div class="container hero-content">
+            <h1 class="display-4 fw-bold mb-3">Official Consultancy Clearance Portal</h1>
+            <p class="lead mb-4" style="max-width: 700px; margin: 0 auto;">Welcome to the official consultancy clearance website for Civil Defence, Correctional, Fire and Immigration Services Board for Clearance. Begin your journey to serve with a honor, integrity, and a national pride.</p>
+            <a href="./instruction.htm" class="btn btn-primary btn-lg pulse mt-3" id="heroApplyBtn">
+                A Consultancy Clearance <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Important Notice Section -->
+    <div style="background-color: #b9bbba; border: 1px solid #b6bdb8; padding: 10px 15px; border-radius: 6px; display: flex; align-items: center; gap: 10px;">
+      <strong style="color: #232c25; white-space: nowrap;">⚠ Be Strictly Warned:</strong>
+      <marquee behavior="scroll" direction="left" scrollamount="5" style="color: #232c25; font-weight: 500; white-space: nowrap;">
+        Read the application guidelines carefully before proceeding. You can apply for ONLY one of the four Paramilitary Services. Submitting more than one application will lead to a disqualification from the recruitment process. Your National Identification Number (NIN) will serve as your unique consultancy clearance ID. A consultancy clearance payment is suggested during your application as a revenue of the FGN.
+      </marquee>
+    </div>
+    
+    
+    
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-6 mb-4 fade-in">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4 class="mb-3">Proceed Consultancy Clearance</h4>
+                        <p class="text-muted mb-4">Proceed the consultancy clearance for recruitment into any of our services.</p>
+                        <a href="./instruction.htm" class="btn btn-primary w-100" id="continueApplicationBtn">
+                            A Consultancy Clearance <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+        
+        
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h5 class="mb-3">CDCFIB Recruitment Portal</h5>
+                    <p>Official recruitment platform for Civil Defence, Correctional, Fire and Immigration Services Board</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h5 class="mb-3">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> hr.fgn.consult@googlemail.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Abuja, Nigeria</li>
+                    </ul>
+                </div>
+
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 CDCFIB. All rights reserved. | Ministry of Interior (MOI)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const step1 = document.getElementById('step1');
+            const proceedBtn = document.getElementById('proceedBtn');
+            const acknowledgeCheck = document.getElementById('acknowledgeCheck');
+            const heroBtn = document.getElementById('heroApplyBtn');
+            const startAppBtn = document.getElementById('startApplicationBtn');
+
+            step1?.style.setProperty('display', 'none');
+
+            const showStep = () => {
+                step1?.style.setProperty('display', 'block');
+                step1?.scrollIntoView({ behavior: 'smooth' });
+            };
+
+            heroBtn?.addEventListener('click', showStep);
+            startAppBtn?.addEventListener('click', showStep);
+
+            acknowledgeCheck?.addEventListener('change', () => {
+                proceedBtn.disabled = !acknowledgeCheck.checked;
+            });
+
+            document.querySelectorAll('.fade-in').forEach((el, i) => {
+                el.style.opacity = 0;
+                setTimeout(() => (el.style.opacity = 1), 150 * i);
+            });
+
+            // Remove pulse class and re-add it after a delay
+            const pulseBtn = document.querySelector('.btn-primary.pulse');
+            setInterval(() => {
+                pulseBtn?.classList.remove('pulse');
+                setTimeout(() => pulseBtn?.classList.add('pulse'), 100);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDCFIB Clearance Portal - Step 1: Clearance Instructions</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        /* Styles from previous layout with minor enhancements */
+        :root {
+            --nigerian-green: #474747;
+            --nigerian-white: #a09f7f;
+            --light-green: #96a7ac;
+            --dark-green: #000000;
+            --accent-gold: #fdfdfd;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #777879 0%, #898a8b 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 0.8rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgb(31, 22, 22);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .logo-circle i {
+            color: var(--nigerian-green);
+            font-size: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            border: none;
+            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 37, 35, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 1px solid var(--nigerian-green);
+            color: var(--nigerian-green);
+            border-radius: 5px;
+            padding: 0.8rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--nigerian-green);
+            color: rgb(105, 103, 103);
+        }
+        
+        .btn-primary:hover, .btn-outline-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(31, 49, 42, 0.4);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            background: rgb(68, 67, 67);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            color: var(--nigerian-white);
+            padding: 1.25rem 1.5rem;
+            border-bottom: none;
+            position: relative;
+        }
+        
+        .card-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gold);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-left: 20px;
+            margin: 25px 0 15px;
+            color: var(--nigerian-green);
+            font-weight: 600;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 24px;
+            background: var(--nigerian-green);
+            border-radius: 4px;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-green) 0%, var(--nigerian-green) 100%);
+            color: var(--nigerian-white);
+            padding: 3rem 0 1.5rem;
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f8f9fa' fill-opacity='1' d='M0,128L48,138.7C96,149,192,171,288,165.3C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .document-box {
+            border: 2px dashed rgba(35, 56, 48, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(87, 119, 96, 0.3);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .document-box:hover {
+            transform: translateY(-3px);
+            border-color: var(--nigerian-green);
+            background: rgba(11, 17, 15, 0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .flag-stripe {
+            height: 6px;
+            background: var(--nigerian-white);
+            position: relative;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?q=80&w=2070') center/cover no-repeat;
+            padding: 4rem 0;
+            color: rgb(87, 86, 86);
+            text-align: center;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--nigerian-green) 0%, var(--dark-green) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: rgb(95, 95, 95);
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(24, 39, 33, 0.3);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(18, 34, 28, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(18, 32, 27, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(14, 24, 20, 0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Step Navigation Styles */
+        .step-box {
+            min-height: 50px;
+            min-width: 120px;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            border-bottom: 5px solid #06080a !important;
+            background-color: #8b8b8b;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            flex-shrink: 1;
+            overflow: hidden;
+        }
+
+        .step-box-active {
+            min-height: 50px;
+            border: 1px solid #797a7c;
+            border-radius: 0.375rem;
+            border-bottom: 5px solid var(--dark-green) !important;
+            background-color: var(--nigerian-green);
+            color: rgb(128, 128, 128);
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .step-box .rounded-circle {
+            background: #8b8b8b;
+            color: #495057;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .step-box-active .rounded-circle {
+            background: rgb(133, 133, 133);
+            color: var(--nigerian-green);
+        }
+        
+        .step-box .step-label {
+            font-weight: 600;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .step-box-active .step-label {
+            color: rgb(163, 163, 163);
+        }
+        
+        .step-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .step-box-disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        
+        .step-navigation-card {
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            background: rgb(163, 163, 163);
+            padding: 15px;
+            overflow-x: auto;
+        }
+        
+        .main-content {
+            flex: 1;
+        }
+        
+        .step-container {
+            background-color: rgb(163, 163, 163);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .step-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-green);
+        }
+        
+        
+        .step-content {
+            padding: 20px 0;
+        }
+        
+        .step-footer {
+            padding-top: 20px;
+            border-top: 2px solid var(--light-green);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .step-item-wrapper {
+            display: block;
+        }
+        
+        /* Hide all steps on mobile, except the active one */
+        @media (max-width: 767px) {
+            .step-navigation-mobile .step-box {
+                background-color: var(--nigerian-green);
+                color: rgb(163, 163, 163);
+                border-bottom: 5px solid var(--dark-green);
+                width: 100%;
+            }
+        
+            .step-navigation-mobile .rounded-circle {
+                background: rgb(163, 163, 163);
+                color: var(--nigerian-green);
+                width: 28px;
+                height: 28px;
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+        
+            .step-navigation-mobile .step-label {
+                color: rgb(163, 163, 163);
+                font-size: 0.95rem;
+            }
+        }
+        
+        .agency-card {
+            transition: all 0.3s ease;
+            border: 1px solid #4c4d4e;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .agency-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--nigerian-green);
+        }
+        
+        .agency-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgb(99, 99, 99);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-size: 1.8rem;
+            color: var(--nigerian-green);
+        }
+        
+        .position-badge {
+            background: rgba(13, 22, 19, 0.1);
+            color: var(--nigerian-green);
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .form-control:focus {
+            border-color: var(--nigerian-green);
+            box-shadow: 0 0 0 0.25rem rgba(31, 51, 43, 0.15);
+        }
+        
+        .upload-preview {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #a5a5a5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            overflow: hidden;
+            background: #585858;
+        }
+        
+        .upload-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            display: none;
+        }
+        
+        .confirmation-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #5f5f5f;
+        }
+        
+        .confirmation-label {
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+        .enhanced-check {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .big-check {
+            width: 28px;
+            height: 28px;
+            margin-top: 0.2rem;
+            margin-right: 0.5rem;
+            border-radius: 4px;
+            border: 2px solid var(--nigerian-green);
+            background-color: rgb(128, 128, 128);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .big-check:checked {
+            background-color: var(--nigerian-green);
+            border-color: var(--nigerian-green);
+        }
+        
+        .big-check:focus {
+            box-shadow: 0 0 0 0.2rem rgba(16, 29, 24, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/" aria-label="CDCFIB Portal Home">
+                <div class="logo-circle me-3">
+                    <img src="logo.png" alt="CDCFIB Logo" class="rounded-circle" style="width: 60px; height: 60px; object-fit: cover;">
+                </div>
+                <div>
+                    <span>CDCFIB</span><br>
+                    <small class="d-block text-white fw-light">Clearance Portal</small>
+                </div>
+            </a>
+            <div class="ms-auto d-flex gap-2">
+                <a href="/" class="btn btn-outline-light">
+                    <i class="fas fa-home me-1"></i> Start
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="flag-stripe"></div>
+    
+    <!-- Hero Section - Only for homepage -->
+    
+    <div class="main-content">
+        <div class="container py-4">
+            
+<div class="step-navigation-desktop d-none d-md-block">
+    <div class="container">
+        <div class="card step-navigation-card p-3">
+            <div class="row align-items-center">
+                <div class="col-md-3 col-12 mb-3 mb-md-0">
+                    <h5 class="mb-1">CDCFIB Clearance</h5>
+                    <small class="text-muted">Step 1 of 1: Consultancy Clearance</small>
+                </div>
+                <div class="col-md-9 col-12">
+                    <div class="d-flex justify-content-between align-items-center text-center flex-nowrap">
+                                                    <div class="flex-fill px-2 step-tab" data-step="1">
+                                <div class="d-flex align-items-center justify-content-center border rounded py-2 px-3 step-box 
+                                    step-box-active">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center">
+                                        1
+                                    </div>
+                                    <div class="step-label fw-bold mx-2">
+                                        Consultancy Clearance
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="step-navigation-mobile d-block d-md-none">
+    <div class="container">
+        <div class="card step-navigation-card p-3 text-center">
+            <h6 class="mb-1">CDCFIB Clearance</h6>
+            <small class="text-muted">Step 1 of 1: Consultancy Clearance</small>
+
+            <div class="mt-3 d-flex justify-content-center">
+                <div class="d-inline-flex align-items-center justify-content-center border rounded py-2 px-3 step-box step-box-active">
+                    <div class="rounded-circle d-flex align-items-center justify-content-center me-2">
+                        1
+                    </div>
+                    <div class="step-label fw-bold">
+                        Consultancy
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            
+            <!-- Main Content Area -->
+            <div class="step-container fade-in">
+    <div class="step-header">
+        <h2><i class="fas fa-info-circle me-2 text-green"></i> Clearance Instructions</h2>
+        <p class="text-muted">Please read all clearance instructions carefully before proceeding</p>
+    </div>
+    
+    <div class="step-content">
+        <div style="color:rgb(78, 0, 0);" class="alert alert-info border-0 bg-light-green">
+            <h5><i class="fas fa-exclamation-circle me-2"></i> Strict Warning</h5>
+            <p class="mb-0"> • Please read all instructions carefully before proceeding with your consultancy clearance.</p>
+            <p class="mb-0"> As an individual candidate for a job replacement exercise it is expected that you should submit your clearance only once from the email address sent to you for a permanent and pensionable appointment at this agency! </p>
+        </div>
+        
+        <h3 class="section-title">How to Complete Your Application</h3>
+        <ol class="mb-4">
+            <li>Ensure you have a valid National Identification Number (NIN)</li>
+            <li>Gather all required documents for a documentation purpose (see list below)</li>
+            <li>Fill in all required fields accurately</li>
+            <li>Review your information before submission</li>
+            <li>Submit successfully</li>
+        </ol>
+        
+        <h3 class="section-title">The Required Document</h3>
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <div class="document-box">
+                    <i class="fas fa-id-card fa-2x text-green"></i>
+                    <h6>NIN Slip</h6>
+                </div>
+            </div>
+        </div>
+        
+        <h3 class="section-title">Eligibility Criteria</h3>
+        <ul class="mb-4">
+            <li>Nigerian citizen by birth</li>
+            <li>Age range: 18 to 35 years</li>
+            <li>Minimum height: 1.65m for males, 1.60m for females</li>
+            <li>Physically and mentally fit</li>
+            <li>No criminal record</li>
+        </ul>
+        
+    </div>
+    
+    <div class="step-footer mt-4">
+        <div></div>
+        <a href="./billing.htm" class="btn btn-primary" id="proceedButton">
+            Proceed With Consultancy Clearance <i class="fas fa-arrow-right ms-2"></i>
+        </a>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkbox = document.getElementById('acknowledgeCheck');
+        const proceedBtn = document.getElementById('proceedButton');
+        const errorMsg = document.getElementById('checkboxError');
+
+        proceedBtn.addEventListener('click', function (e) {
+            if (!checkbox.checked) {
+                e.preventDefault();
+                errorMsg.classList.remove('d-none');
+            } else {
+                errorMsg.classList.add('d-none');
+            }
+        });
+    });
+</script>
+
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h5 class="mb-3">CDCFIB Recruitment Portal</h5>
+                    <p>Official recruitment platform for Civil Defence, Correctional, Fire and Immigration Services Board Recruitment</p>
+                    <div class="mt-3">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h5 class="mb-3">Contact</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> hr.fgn.consult@googlemail.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Abuja, Nigeria</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 CDCFIB. All rights reserved. | Ministry of Interior (MOI)</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fade-in animation for elements
+            document.querySelectorAll('.fade-in').forEach((el, i) => {
+                el.style.opacity = 0;
+                setTimeout(() => (el.style.opacity = 1), 150 * i);
+            });
+
+            // Pulse animation for CTA buttons
+            const pulseBtn = document.querySelector('.btn-primary.pulse');
+            if (pulseBtn) {
+                setInterval(() => {
+                    pulseBtn.classList.remove('pulse');
+                    setTimeout(() => pulseBtn.classList.add('pulse'), 100);
+                }, 2000);
+            }
+            
+            // Step navigation functionality
+            const stepLinks = document.querySelectorAll('.step-link');
+            if (stepLinks.length) {
+                stepLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const step = this.getAttribute('data-step');
+                        
+                        // Update step navigation styles
+                        document.querySelectorAll('.step-box').forEach(box => {
+                            box.classList.remove('step-box-active');
+                            box.classList.add('step-box');
+                        });
+                        
+                        this.querySelector('.step-box').classList.remove('step-box');
+                        this.querySelector('.step-box').classList.add('step-box-active');
+                        
+                        // Update step description
+                        const stepDescription = document.getElementById('step-description');
+                        if (stepDescription) {
+                            const stepNames = {
+                                1: "Instructions",
+                                2: "Selection",
+                                3: "Identification",
+                                4: "Application",
+                                5: "Confirmation"
+                            };
+                            stepDescription.textContent = `Step ${step} of 5: ${stepNames[step]}`;
+                        }
+                    });
+                });
+            }
+            
+            // Document upload preview
+            const fileInputs = document.querySelectorAll('.document-upload');
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    const previewId = this.getAttribute('data-preview');
+                    const preview = document.getElementById(previewId);
+                    const file = this.files[0];
+                    
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                            preview.querySelector('img').style.display = 'block';
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.innerWidth <= 768) {
+                document.querySelectorAll('.step-item-wrapper').forEach(wrapper => {
+                    const active = wrapper.querySelector('.step-box-active');
+                    wrapper.style.display = active ? 'block' : 'none';
+                });
+            }
+        });
+    </script>
+    
+   
+    
+</body>
+
+</html>
